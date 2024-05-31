@@ -2,13 +2,10 @@
 include 'includes/nav.php';
 include 'includes/dbconnect.php';
 include 'razorpay-php/Razorpay.php';
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(0);
 
 $email = $_GET['uid'];
-
 $pid = $_SESSION['pid'];
-
-
 ?>
 
 
@@ -60,10 +57,8 @@ $pid = $_SESSION['pid'];
 
                 $api = new Api($keyId, $keySecret);
 
-
-
+                
                 $query = mysqli_query($conn, "SELECT * FROM products WHERE pid='$pid'");
-
                 if ($row = mysqli_fetch_array($query)) {
                     $name = $row['pname'];
                     $price = $row['pprice'];
@@ -189,23 +184,16 @@ $pid = $_SESSION['pid'];
                 </div>
 
 
-                <a class="btn btn-warning py-2 by-5" href="ordertrack.php?pid=<?php echo($pid);?>" >Cash on Delivery
-                </a><br>
-<br>
+                <!-- <a class="btn btn-warning py-2 by-5" href="ordertrack.php?pid=<?php echo ($pid); ?>">Cash on Delivery
+                </a><br> -->
+                <br>
                 <form action="verify.php ">
                     <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_KieuS2HPO6ps21" async> </script>
                 </form>
 
 
-
-                <script>
-                    function nextpage() {
-                        window.location.href = "ordertrack.php";
-                    }
-                </script>
             </div>
             <div class="col">
-
                 <div class="card my-2 mx-2 crd1" id="<?php echo ($pid) ?>" style="width: 18rem; ">
                     <a href="product.php?product=<?php echo ($pid); ?>" class="text">
                         <img src="images/product/<?php echo ($img); ?>" class="card-img-top pimg" alt="...">
@@ -218,8 +206,6 @@ $pid = $_SESSION['pid'];
                         </div>
                     </a>
                 </div>
-
-
             </div>
         </div>
     </div>

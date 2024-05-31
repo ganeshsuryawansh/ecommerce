@@ -3,8 +3,7 @@ $showAlert = false;
 $sql = false;
 include 'includes/dbconnect.php';
 include 'includes/nav.php';
-//session_start();
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(0);
 
 
 ?>
@@ -19,128 +18,114 @@ error_reporting(E_ALL ^ E_NOTICE);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyCart-Signup</title>
     <style>
-        .container {
-            align-items: center;
-        }
-
-        .inp {
-            width: 1000px;
-        }
-
-        .cont {
-            background-color: pink;
-        }
-
         .offerimg {
             height: 500px;
-            width: 550px;
+            width: 450px;
             margin-right: 255px;
         }
-
-        .cold {}
     </style>
 
 </head>
 
 <body>
 
-    <div class="container cont my-5 text-left">
+    <div class="container cont my-5 ">
 
-        <div class="container text-left">
+        <div class="container ">
+            <h4 class=" text-center my-5">Start Your Shopping Journy!</h4>
+
             <div class="row">
-                <h1 class="">Signup And start Shopping</h1>
-                <div class="col-6 cold">
+                <div class="col-md-6">
                     <form action="signup.php" method="POST">
 
-                        <div class="form-group col-md-6">
-                            <label for="Username">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="username" required>
+                        <div class="row border border-dark">
+                            <div class="col">
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="Name" name="username" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="Email" name="email" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="City" name="city" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="Subdistrict" name="subdistrict" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="District" name="district" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="text" class="form-control" placeholder="State" name="state" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="number" class="form-control" placeholder="ZipCode" name="zipcode" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="number" class="form-control" placeholder="Phone" name="phone" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="number" class="form-control" placeholder="Alternate Phone" name="alphone" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="my-3">
+                                        <input type="password" class="form-control" placeholder="Confirm Password" name="cpassword" required>
+                                    </div>
+                                </div>
+
+                                <button type="submit" name="submit" class="btn btn-primary my-2 col-12">Submit</button><br>
+                                <p style="font-size: 12px;">Already Signup <a href="login.php">Login </a>Here !</p>
                             </div>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="Username">Email</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="email" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">City</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="city" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">Subdistrict</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="subdistrict" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">District</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="district" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">State</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" name="state" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">ZipCode</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="" name="zipcode" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">Phone</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="" name="phone" required>
-                            </div>
-                        </div>
 
 
-                        <div class="form-group col-md-6">
-                            <label for="Username">Alternate Phone</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="" name="alphone" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="Username">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="" name="password" required>
-                            </div>
-                        </div>
 
 
-                        <div class="form-group col-md-6">
-                            <label for="Username">Confirm Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="" name="cpassword" required>
-                            </div>
-                        </div>
 
-                        <button type="submit" name="submit" class="btn btn-primary my-2">Submit</button>
-                        <b>Already Signup <a href="http://localhost/ecommerce/login.php">LogIn </a>Here !</b>
+
+
                     </form>
                 </div>
-                <div class="col-4 cold">
-                    <h4>
-                        If you have already registered with <b>mycart</b>- The shopping site Login now 👇
-                    </h4>
-                    <a href="http://localhost/ecommerce/login.php" class="btn btn-primary">LOGIN</a>
-                    <div class="container offercontainer">
+                <div class="col-6 d-none d-md-block">
+
+                    <div class="">
                         <img src="images/product/megasale.img.png" class="offerimg" alt="offer">
                     </div>
 
@@ -217,10 +202,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
     </div>
 
-</body>
 
-</html>
-
-<?php
-include 'includes/footer.php';
-?>
+    <?php
+    include 'includes/footer.php';
+    ?>

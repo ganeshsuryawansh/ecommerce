@@ -14,9 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //echo($num);
     if ($num == 1) {
         while ($row = mysqli_fetch_assoc($result)) {
-
-            //echo ($row['password']);
-
             if ($password == $row['password']) {
 
                 $login = true;
@@ -48,17 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <title>Login</title>
     <style>
-        .cont {
-            background-color: pink;
-            height: 900px;
-        }
-
         .cold {
             border: 1px solid black;
             border-radius: 10px 10px 10px 10px;
         }
-
-        .cont2 {}
 
         .offerimg {
             height: 500px;
@@ -89,32 +79,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div> ';
     }
     ?>
+    <h4 class="text-left text-center my-5">Start Your Shopping Journy!</h4>
 
     <div class="container cont my-5">
-        <h1 class="text-left">Login to our website</h1>
 
 
         <div class="container cont2 text-left">
             <div class="row">
-                <div class="col-5 cold">
-                    <form action="login.php" method="post">
+                <div class="col-md-5 cold">
+                    <form class="py-5" action="login.php" method="post">
+
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"required>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Your Email" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" required>
                         </div>
-                        <button type="submit" class="btn btn-warning my-3">Login</button>
+                        <button type="submit" class="btn btn-warning my-3 col-12">Login</button>
+                        <p style="font-size: 12px;">You Don't Have Account Then <a href="signup.php" rel="noopener noreferrer">Register Now!</a></p>
 
                     </form>
 
                 </div>
-                <div class="col-4 ">
+                <div class="col-4 d-none d-md-block">
                     <div class="container offercontainer">
                         <a href="http://localhost/ecommerce/">
-                        <img src="images/banner/banneroffer.jpg" class="offerimg" alt="offer">
+                            <img src="images/banner/banneroffer.jpg" class="offerimg" alt="offer">
                         </a>
                     </div>
 
@@ -125,16 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<div class="foot fixed-bottom">
-    <?php
-    //include 'includes/footer.php';
-    ?>
-</div>
+    <div class="foot fixed-bottom">
+
+    </div>
 </body>
 
 </html>

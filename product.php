@@ -72,6 +72,8 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
         $price = $row['pprice'];
         $info = $row['pdesc'];
         $img = $row['pimg'];
+        $img2 = $row['p2img'];
+
         $subcat = $row['psubcat'];
 
         $_SESSION['pprice'] = $price;
@@ -81,9 +83,9 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
       }
       ?>
       <div class="col ">
-        <div class=" my-2 mx-5" id="" style="width: 18rem; ">
+        <div class="my-2 mx-md-5" id="" style="width: 18rem; ">
           <a href="product.php?product=<?php echo ($row['pid']); ?>" class="text">
-            <img src="images/product/<?php echo ($img); ?>" class="card-img-top pimg mx-3" alt="...">
+            <img src="images/product/<?php echo ($img ? $img : $img2); ?>" class="card-img-top pimg mx-3" alt="...">
 
           </a>
           <div class="container text-center my-2">
@@ -93,22 +95,20 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
 
               </div>
               <div class="col">
-                <a href="http://localhost/ecommerce/cart.php?id=<?php echo ($id); ?>" class="btn btn-warning pbtn my-2 mx-0">ADD TO CART</a>
+                <a href="cart.php?id=<?php echo ($id); ?>" class="btn btn-warning pbtn my-2 mx-0">ADD TO CART</a>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col pdetails">
-        <div class="my-3">
-          <h3><?php echo ($name); ?></h3>
-          <h2 class="text">₹<?php echo ($price); ?></h2>
-          <h2 class="distag">30% off</h2>
-          <h2><i class="tag">Free delivery</i></h2>
-          <h5 class="text"><?php echo ($info); ?></h5>
-        </div>
-        <div class="my-3">
 
+        <div class="my-3">
+          <h4 class="text-start"><?php echo ($name); ?></h4>
+          <h2 class="text-start">₹<?php echo ($price); ?></h2>
+          <h2 class="distag text-start">30% off</h2>
+          <h2><i class="tag text-start">Free delivery</i></h2>
+          <h5 class=" text-start"><?php echo ($info); ?></h5>
         </div>
       </div>
 
@@ -125,19 +125,17 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
         $price = $row['pprice'];
         $info = $row['pdesc'];
         $img = $row['pimg'];
+        $img2 = $row['p2img'];
         $pid = $row['pid'];
-
-
       ?>
         <div class="col">
           <div class="card my-2 mx-2" id="<?php echo ($pid) ?>" style="width: 18rem; ">
             <a href="product.php?product=<?php echo ($row['pid']); ?>" class="text">
-              <img src="images/product/<?php echo ($img); ?>" class="card-img-top flpimg" alt="...">
+              <img src="images/product/<?php echo ($img ? $img : $img2); ?>" class="card-img-top flpimg" alt="...">
               <div class="card-body">
                 <h5 class="card-title"><?php echo ($name); ?></h5>
                 <p class="card-text">₹<?php echo ($price); ?>
                 <p class="distag">30% off</p><i>Free delivery</i></p>
-                <a href="#" class="btn btn-warning">❤️WISHLIST</a>
               </div>
             </a>
 

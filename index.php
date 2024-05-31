@@ -13,17 +13,16 @@ include 'includes/dbconnect.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <style>
-        body{
-            /*background-color: blueviolet;*/
-        }
         .pimg {
             height: 280px;
             width: 300px;
         }
-        .pimgfurniture{
+
+        .pimgfurniture {
             height: 280px;
             width: 287px;
         }
+
         .text {
             text-decoration: none;
             color: black;
@@ -34,39 +33,42 @@ include 'includes/dbconnect.php';
             font-weight: bolder;
             font-size: large;
         }
-        
-        .cardbody{
+
+        .cardbody {
             background-color: pink;
             border-radius: 0px 0px 0px 0px;
         }
-        .crd1{
+
+        .crd1 {
             height: 500px;
-            border-radius:30px 30px 30px 30px;
+            border-radius: 30px 30px 30px 30px;
             overflow: hidden;
             /*background-color: pink;*/
         }
 
-        .c1{
+        .c1 {
             /*background-color: blueviolet;*/
             /*height: 1700px;*/
         }
 
-        .crd2{
-                    height: 600px;
-                    border-radius:30px 30px 30px 30px;
-                    overflow: hidden;
-                    /*background-color: pink;*/
-                }
-        .c2{
+        .crd2 {
+            height: 600px;
+            border-radius: 30px 30px 30px 30px;
+            overflow: hidden;
+            /*background-color: pink;*/
+        }
+
+        .c2 {
             /*background-color: blueviolet;*/
             margin-top: 50px;
         }
-        .crd3{
-                    height: 600px;
-                    border-radius:30px 30px 30px 30px;
-                    overflow: hidden;
-                    /*background-color: pink;*/
-                }
+
+        .crd3 {
+            height: 600px;
+            border-radius: 30px 30px 30px 30px;
+            overflow: hidden;
+            /*background-color: pink;*/
+        }
     </style>
 </head>
 
@@ -109,6 +111,7 @@ include 'includes/dbconnect.php';
                 $price = $row['pprice'];
                 $info = $row['pdesc'];
                 $img = $row['pimg'];
+                $img2 = $row['p2img'];
                 $pid = $row['pid'];
 
 
@@ -116,7 +119,7 @@ include 'includes/dbconnect.php';
                 <div class="col">
                     <div class="card my-2 mx-2 crd1" id="<?php echo ($pid) ?>" style="width: 18rem; ">
                         <a href="product.php?product=<?php echo ($row['pid']); ?>" class="text">
-                            <img src="images/product/<?php echo ($img); ?>" class="card-img-top pimg" alt="...">
+                            <img src="images/product/<?php echo ($img ? $img : $img2); ?>" class="card-img-top pimg" alt="...">
                             <div class="card-body cardbody">
                                 <h5 class="card-title"><?php echo ($name); ?></h5>
                                 <h3 class="card-text">₹<?php echo ($price); ?></h3>
@@ -149,6 +152,8 @@ include 'includes/dbconnect.php';
                 $price = $row['pprice'];
                 $info = $row['pdesc'];
                 $img = $row['pimg'];
+                $img2 = $row['p2img'];
+
                 $pid = $row['pid'];
 
                 //echo($img);
@@ -156,12 +161,12 @@ include 'includes/dbconnect.php';
                 <div class="col" id="<?php echo ($pid) ?>">
                     <a href="product.php?product=<?php echo ($row['pid']); ?>" class="text">
                         <div class="card my-5 mx-0 crd2" style="width: 18rem;">
-                            <img src="images/product/<?php echo ($img); ?>" class="card-img-top mx-0 pimg" alt="...">
+                            <img src="images/product/<?php echo ($img ? $img : $img2); ?>" class="card-img-top mx-0 pimg" alt="...">
                             <div class="card-body cardbody">
                                 <h5 class="card-title"><?php echo ($name); ?></h5>
                                 <h3 class="card-text">₹<?php echo ($price); ?></h3>
                                 <p class="distag">75% off</p><i>Free delivery</i></p>
-                                
+
                                 <a href="#" class="btn btn-warning">❤️</a>
                             </div>
                         </div>
@@ -191,6 +196,8 @@ include 'includes/dbconnect.php';
                 $price = $row['pprice'];
                 $info = $row['pdesc'];
                 $img = $row['pimg'];
+                $img2 = $row['p2img'];
+
                 $pid = $row['pid'];
 
                 //echo($img);
@@ -198,7 +205,7 @@ include 'includes/dbconnect.php';
                 <div class="col" id="<?php echo ($pid) ?>">
                     <a href="product.php?product=<?php echo ($row['pid']); ?>" class="text">
                         <div class="card my-2 mx-0 crd3" style="width: 18rem;">
-                            <img src="images/product/<?php echo ($img); ?>" class="card-img-top mx-0 pimgfurniture" alt="...">
+                            <img src="images/product/<?php echo ($img ? $img : $img2); ?>" class="card-img-top mx-0 pimgfurniture" alt="...">
                             <div class="card-body cardbody">
                                 <h5 class="card-title"><?php echo ($name); ?></h5>
                                 <h3 class="card-text">₹<?php echo ($price); ?></h3>

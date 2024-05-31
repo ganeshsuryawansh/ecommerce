@@ -2,9 +2,6 @@
 $showAlert = false;
 $login = false;
 include 'includes/nav.php';
-
-session_start();
-
 ?>
 
 
