@@ -15,13 +15,10 @@
 </html>
 
 <?php
-
-
 require_once('../includes/dbconnect.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // echo 'hhhhhhhhhhhhhhhhhhhhhh';
     // echo '<pre>';
     // print_r($_POST);
     // exit;

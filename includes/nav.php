@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <body>
@@ -23,7 +22,7 @@ session_start();
                                 <a class="nav-link active text-warning" aria-current="page" href="profile.php"><?= $_SESSION['email'] ?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-danger" aria-current="page" href="logout.php">Logout</a>
+                                <a class="nav-link active text-danger" aria-current="page" href="Service/logout.php">Logout</a>
                             </li>
                         <?php
                         } else {

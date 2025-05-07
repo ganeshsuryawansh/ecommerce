@@ -2,27 +2,8 @@
 include 'includes/nav.php';
 include 'includes/dbconnect.php';
 error_reporting(0);
-
-if (!$_SESSION['loggedin']) {
-    header("location:login.php");
-}
-
-$id = $_GET['id'];
+session_start();
 $email = $_SESSION['email'];
-$token = $_GET['id'] . $_SESSION['email'];
-
-// Add to cart
-if (isset($id)) {
-    $sql2 = "INSERT INTO `usercart` (`pro_id`,`emailid`,`token`) VALUES ('$id','$email','$token')";
-    $result = mysqli_query($conn, $sql2);
-}
-
-// Remove from cart
-if (isset($_GET['rid'])) {
-    $sql3 = "DELETE FROM `usercart`WHERE pro_id='$_GET[rid]'";
-    $result = mysqli_query($conn, $sql3);
-}
-
 
 ?>
 <!doctype html>
@@ -62,11 +43,17 @@ if (isset($_GET['rid'])) {
             <div class="col-8">
                 <div>
                     <?php
-                    $queryproid = mysqli_query($conn, "SELECT * FROM usercart WHERE emailid='$email'");
-                    while ($row = mysqli_fetch_array($queryproid)) {
-                        $fid = $row['pro_id'];
 
-                        $query = mysqli_query($conn, "SELECT * FROM products WHERE pid='$fid'");
+                    $qr = "SELECT products.*, usercart.*
+                    FROM usercart
+                    INNER JOIN products ON usercart.pro_id = products.pid
+                    WHERE usercart.emailid = '$email'";
+
+                    $query = mysqli_query($conn, $qr);
+
+                    $rw = mysqli_num_rows($query);
+
+                    if ($rw > 0) {
                         while ($row = mysqli_fetch_array($query)) {
                             $tamt;
                             $name = $row['pname'];
@@ -78,7 +65,6 @@ if (isset($_GET['rid'])) {
                             $id = $row['pid'];
                     ?>
 
-
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-4">
@@ -89,7 +75,7 @@ if (isset($_GET['rid'])) {
                                             <h5 class="card-title text-start text-black"> <a style="text-decoration: none; color:black;" href="product.php?product=<?= $id ?>"><?= $name; ?></a></h5>
                                             <p class="text-start">RS. <?= $price ?></p>
                                             <p class="text-start">
-                                                <a href="cart.php?rid=<?php echo ($id); ?>" class="btn btn-warning">Remove From Cart</a>
+                                                <a href="Service/remove_cart.php?rid=<?= $id ?>" class="btn btn-warning">Remove From Cart</a>
                                             </p>
                                         </div>
                                     </div>
@@ -98,13 +84,14 @@ if (isset($_GET['rid'])) {
 
                     <?php
                         }
+                    } else {
+                        echo "<h4 class='text-center text-light'>No items in cart!</h4>";
                     }
                     ?>
                 </div>
             </div>
 
             <div class="col-4">
-
                 <div class="card border-warning mb-3 procrd bg-$pink" style="max-width: 18rem;">
                     <div class="card-header ">PRICE DETAILS</div>
                     <div class="card-body">

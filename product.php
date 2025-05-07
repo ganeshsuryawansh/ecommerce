@@ -95,7 +95,7 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
 
               </div>
               <div class="col">
-                <a href="cart.php?id=<?php echo ($id); ?>" class="btn btn-warning pbtn my-2 mx-0">ADD TO CART</a>
+                <a href="Service/add_cart.php?id=<?= $id; ?>" class="btn btn-warning pbtn my-2 mx-0">ADD TO CART</a>
               </div>
             </div>
           </div>

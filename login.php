@@ -1,36 +1,3 @@
-<?php
-$login = false;
-$showError = false;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    include 'includes/dbconnect.php';
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    $num = mysqli_num_rows($result);
-    //echo($num);
-    if ($num == 1) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            if ($password == $row['password']) {
-
-                $login = true;
-                session_start();
-                $_SESSION['loggedin'] = true;
-                $_SESSION['email'] = $email;
-                header("location: index.php");
-            } else {
-                $showError = "Invalid Credentialss";
-            }
-        }
-    } else {
-        $showError = "Invalid Credentials";
-    }
-}
-
-?>
 
 <!doctype html>
 <html lang="en">
@@ -61,24 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <?php include 'includes/nav.php'; ?>
-    <?php
-    if ($login) {
-        echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> You are logged in
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    }
-    if ($showError) {
-        echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> ' . $showError . '
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    }
-    ?>
+   
     <h4 class="text-left text-center my-5">Start Your Shopping Journy!</h4>
 
     <div class="container cont my-5">
@@ -87,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container cont2 text-left">
             <div class="row">
                 <div class="col-md-5 cold">
-                    <form class="py-5" action="login.php" method="post">
+                    <form class="py-5" action="Service/login.php" method="post">
 
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Your Email" required>
