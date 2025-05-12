@@ -1,7 +1,7 @@
 <?php
 include 'includes/nav.php';
 include 'includes/dbconnect.php';
-include 'razorpay-php/Razorpay.php';
+// include 'razorpay-php/Razorpay.php';
 include 'includes/functions.php';
 
 error_reporting(0);

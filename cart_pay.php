@@ -1,13 +1,12 @@
 <?php
 include 'includes/nav.php';
 include 'includes/dbconnect.php';
-include 'razorpay-php/Razorpay.php';
+// include 'razorpay-php/Razorpay.php';
 include 'includes/functions.php';
 error_reporting(0);
 $price = 0;
 $email =  $_SESSION['email'];
 $pid =  $_SESSION['pid'];
-
 
 
 if ($_GET['addorder'] && $_GET['trnid']) {
@@ -33,7 +32,7 @@ if ($_GET['addorder'] && $_GET['trnid']) {
             add_payment($pid, $email, $price, $trnid);
         }
     }
-    // header("location:myorders.php");
+    header("location:myorders.php");
 }
 
 ?>
@@ -79,9 +78,10 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                         <?php
                         $tamt = 0;
                         $queryproid = mysqli_query($conn, "SELECT * FROM usercart WHERE emailid='$email'");
+                        $totrow = mysqli_num_rows($queryproid);
+
                         while ($row = mysqli_fetch_array($queryproid)) {
                             $fid = $row['pro_id'];
-
                             $query = mysqli_query($conn, "SELECT * FROM products WHERE pid='$fid'");
                             while ($row2 = mysqli_fetch_array($query)) {
                                 $name = $row2['pname'];
@@ -92,9 +92,13 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                                 $tamt = $tamt + $price;
                                 $pid = $row2['pid'];
                         ?>
-
                                 <tr>
-                                    <th class="border" scope="row"><?= ++$i ?></th>
+                                    <th class="border" scope="row">
+                                        <?= ++$i ?>
+                                        <input type="text" id="pid<?= $i ?>" value="<?= $pid ?>">
+                                        <input type="text" id="paid<?= $i ?>" value="<?= $row2['pprice'] ?>">
+
+                                    </th>
                                     <td class="border"><?= $row2['pname'] ?></td>
                                     <td class="border"><img src="images/product/<?= $row2['pimg'] ? $row2['pimg'] : $row2['p2img'] ?>" height="100px" width="100px" alt=""></td>
                                     <td class="border">Rs. <?= $row2['pprice'] ?></td>
@@ -108,11 +112,13 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                         <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
+                            <td>
+                            </td>
                             <td class="border">Total Amount: <?= number_format($tamt) ?></td>
                         </tr>
 
                         <input type="hidden" id="price" value="<?= $tamt ?>">
+                        <input type="hidden" id="totrows" value="<?= $totrow ?>">
                     </tbody>
                 </table>
             </div>
@@ -137,9 +143,12 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                         <p><b>Phone No: </b> <?= $phone . " / " . $alterphone ?></p>
                         <p><b>Address: </b> <?= $city . " " . $subdistrict . " " . $district . " " . $state ?></p>
                         <p><b>ZipCode: </b><?= $zipcode ?></p>
-                        <button class="btn btn-primary" onclick="pay()">Pay Now</button>
+
+                        <button class="btn btn-primary col-2" onclick="pay()">Pay Now</button>
 
                         <input type="hidden" id="name" value="<?= $usern ?>">
+                        <input type="hidden" id="email" value="<?= $email ?>">
+
                     </div>
                 <?php
                 }
@@ -149,23 +158,32 @@ if ($_GET['addorder'] && $_GET['trnid']) {
     </div>
 
 
-
-
-
-
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        let totrow = document.getElementById('totrows').value;
+        let ChartCheckout = [];
+
+        for (let i = 1; i <= totrow; i++) {
+            let pid = document.getElementById('pid' + i).value;
+            let paid = document.getElementById('paid' + i).value;
+            let email = document.getElementById('email').value;
+
+            let obj = {
+                "item_id": pid,
+                "item_price": paid,
+                "user_email": email,
+            }
+
+            ChartCheckout.push(obj);
+        }
+
+        console.log(ChartCheckout);
+
+
         function pay() {
             let name = document.getElementById('name').value;
             let price = document.getElementById('price').value;
-
-            // console.log(name);
-            // console.log(price);
 
             razorpaySubmit(price, price, name);
         }
@@ -180,7 +198,23 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                 // image: "",
                 handler: function(response) {
                     // alert("Payment successful: " + response.razorpay_payment_id);
-                    window.location.href = 'http://localhost:8080/ecommerce/cart_pay.php?addorder=1&trnid=' + response.razorpay_payment_id;
+                    // window.location.href = 'http://localhost:8080/ecommerce/cart_pay.php?addorder=1&trnid=' + response.razorpay_payment_id;
+
+                    ChartCheckout.map((item) => {
+                        item["razorpay_payment_id"] = response.razorpay_payment_id;
+
+                        fetch('http://localhost:8080/ecommerce/Service/checkout_cart.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(item),
+                            })
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
+                    });
+
                 },
                 prefill: {
                     name: desc,

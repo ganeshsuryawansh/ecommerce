@@ -35,13 +35,13 @@ include 'includes/dbconnect.php';
         }
 
         .cardbody {
-            background-color: pink;
+            background-color: #e7d9dc;
             border-radius: 0px 0px 0px 0px;
         }
 
         .crd1 {
             height: 500px;
-            border-radius: 30px 30px 30px 30px;
+            /* border-radius: 30px 30px 30px 30px; */
             overflow: hidden;
             /*background-color: pink;*/
         }
@@ -53,7 +53,7 @@ include 'includes/dbconnect.php';
 
         .crd2 {
             height: 600px;
-            border-radius: 30px 30px 30px 30px;
+            /* border-radius: 30px 30px 30px 30px; */
             overflow: hidden;
             /*background-color: pink;*/
         }
@@ -65,7 +65,7 @@ include 'includes/dbconnect.php';
 
         .crd3 {
             height: 600px;
-            border-radius: 30px 30px 30px 30px;
+            /* border-radius: 30px 30px 30px 30px; */
             overflow: hidden;
             /*background-color: pink;*/
         }
@@ -99,11 +99,10 @@ include 'includes/dbconnect.php';
     </div>
 
     <div class="container c1">
-        <h1>Electronics</h1>
+        <h1 class="my-5" >Electronics</h1>
         <div class="row">
 
             <?php
-            include 'includes/dbconnect.php';
             $query = mysqli_query($conn, "SELECT * FROM products WHERE pcat='Electronics'");
 
             while ($row = mysqli_fetch_array($query)) {
@@ -124,10 +123,9 @@ include 'includes/dbconnect.php';
                                 <h3 class="card-text">₹<?php echo ($price); ?></h3>
                                 <p class="distag">30% off</p><br>
                                 <i>Free delivery</i><br>
-                                <a href="#" class="btn btn-warning">❤️</a>
+                                <a href="#" class="btn btn-warning p-0 m-0">❤️</a>
                             </div>
                         </a>
-
                     </div>
                 </div>
             <?php

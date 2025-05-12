@@ -1,16 +1,13 @@
 <?php
 include 'includes/nav.php';
 include 'includes/dbconnect.php';
-include 'razorpay-php/Razorpay.php';
+// include 'razorpay-php/Razorpay.php';
 include 'includes/functions.php';
-error_reporting(0);
+// error_reporting(0);
 $price = 0;
 $email =  $_SESSION['email'];
 $pid =  $_SESSION['pid'];
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +65,7 @@ $pid =  $_SESSION['pid'];
                 <?php
 
 
-                        if ($_GET['addorder'] && $_GET['trnid']) {
+                        if (isset($_GET['addorder']) && isset($_GET['trnid'])) {
                             add_order($pid, $email, 1);
                             $trnid = $_GET['trnid'];
                             add_payment($pid, $email, $price, $trnid);
@@ -155,7 +152,7 @@ $pid =  $_SESSION['pid'];
             razorpay_instance.open();
         }
     </script>
-    <?= $this->include('./includes/footer.php') ?>
+    <?php include('./includes/footer.php') ?>
 </body>
 
 </html>
