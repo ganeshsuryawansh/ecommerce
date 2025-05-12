@@ -64,7 +64,6 @@ $pid =  $_SESSION['pid'];
                         </div>
                 <?php
 
-
                         if (isset($_GET['addorder']) && isset($_GET['trnid'])) {
                             add_order($pid, $email, 1);
                             $trnid = $_GET['trnid'];

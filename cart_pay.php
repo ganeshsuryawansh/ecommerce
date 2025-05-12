@@ -95,8 +95,8 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                                 <tr>
                                     <th class="border" scope="row">
                                         <?= ++$i ?>
-                                        <input type="text" id="pid<?= $i ?>" value="<?= $pid ?>">
-                                        <input type="text" id="paid<?= $i ?>" value="<?= $row2['pprice'] ?>">
+                                        <input type="hidden" id="pid<?= $i ?>" value="<?= $pid ?>">
+                                        <input type="hidden" id="paid<?= $i ?>" value="<?= $row2['pprice'] ?>">
 
                                     </th>
                                     <td class="border"><?= $row2['pname'] ?></td>
@@ -126,6 +126,7 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                 <?php
                 $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
                 while ($row = mysqli_fetch_array($query)) {
+
                     $usern = $row['username'];
                     $state = $row['state'];
                     $district = $row['district'];
@@ -211,7 +212,14 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                                 body: JSON.stringify(item),
                             })
                             .then(response => response.json())
-                            .then(data => console.log(data))
+                            .then(data => {
+                                // console.log('Success:', data);
+                                // if (data.status == 200) {
+                                    window.location.href = 'http://localhost:8080/ecommerce/myorders.php';
+                                // } else {
+                                //     alert("Something went wrong");
+                                // }
+                            })
                             .catch(error => console.error('Error:', error));
                     });
 
