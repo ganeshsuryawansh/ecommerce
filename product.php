@@ -68,6 +68,7 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
       $query = mysqli_query($conn, "SELECT * FROM products WHERE pid='$id'");
 
       if ($row = mysqli_fetch_array($query)) {
+        
         $name = $row['pname'];
         $price = $row['pprice'];
         $info = $row['pdesc'];
@@ -114,6 +115,13 @@ if (filter_var($id, FILTER_VALIDATE_INT) === FALSE) {
 
     </div>
   </div>
+
+
+  <div class="container p-5">
+    <h4>Related Products</h4>
+  </div>
+
+
 
   <div class="container">
     <div class="row">

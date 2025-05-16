@@ -215,7 +215,7 @@ if ($_GET['addorder'] && $_GET['trnid']) {
                             .then(data => {
                                 // console.log('Success:', data);
                                 // if (data.status == 200) {
-                                    window.location.href = 'http://localhost:8080/ecommerce/myorders.php';
+                                window.location.href = 'http://localhost:8080/ecommerce/myorders.php';
                                 // } else {
                                 //     alert("Something went wrong");
                                 // }
@@ -234,7 +234,7 @@ if ($_GET['addorder'] && $_GET['trnid']) {
             razorpay_instance.open();
         }
     </script>
-    <?= $this->include('./includes/footer.php') ?>
+    <?php include('./includes/footer.php') ?>
 </body>
 
 </html>

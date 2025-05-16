@@ -233,5 +233,5 @@ include 'includes/dbconnect.php';
 </html>
 
 <?php
-//include 'includes/footer.php';
+include 'includes/footer.php';
 ?>

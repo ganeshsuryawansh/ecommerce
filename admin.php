@@ -3,8 +3,6 @@ include 'includes/dbconnect.php';
 error_reporting(0); ?>
 
 
-
-
 <div class="container my-5">
     <h4>Add Product</h4>
     <form action="/ecommerce/admin.php" method="POST">
